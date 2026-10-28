@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MailFlow — ayesharizwan.com</title>
+    <meta
+      name="description"
+      content="MailFlow email infrastructure for ayesharizwan.com. Powered by Cloudflare and AWS SES."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav__brand">
+        <span class="logo" aria-hidden="true">MF</span>
+        <div>
+          <strong>MailFlow</strong>
+          <span>ayesharizwan.com</span>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Primary">
+        <button type="button" class="tab is-active" data-page="overview">Overview</button>
+        <button type="button" class="tab" data-page="inbox">Inbox</button>
+        <button type="button" class="tab" data-page="explorer">Delivery Explorer</button>
+      </nav>
+      <div class="nav__right">
+        <button type="button" id="compose-btn" class="btn btn--primary">Compose</button>
+        <div class="avatar avatar--self" title="MailFlow">MF</div>
+      </div>
+    </header>
+
+    <main>
+      <section id="page-overview" class="page is-active" data-page="overview">
+        <div class="page__head">
+          <h1>Email Overview</h1>
+          <p>ayesharizwan.com · AWS SES ap-south-1 · Cloudflare Routing</p>
+        </div>
+
+        <div class="metrics">
+          <button type="button" class="metric" data-go="sent">
+            <div class="metric__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            </div>
+            <div class="metric__value">843</div>
+            <div class="metric__label">Sent</div>
+            <div class="metric__sub">messages submitted</div>
+            <div class="trend trend--up">↑ 12% this week</div>
+          </button>
+          <button type="button" class="metric" data-go="received">
+            <div class="metric__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H6l-2 4V4z"/></svg>
+            </div>
+            <div class="metric__value">1,247</div>
+            <div class="metric__label">Received</div>
+            <div class="metric__sub">incoming messages</div>
+            <div class="trend trend--up">↑ 8% this week</div>
+          </button>
+          <button type="button" class="metric" data-go="delivered">
+            <div class="metric__icon metric__icon--ok" aria-hidden="true">✓</div>
+            <div class="metric__value">828</div>
+            <div class="metric__label">Delivered</div>
+            <div class="metric__sub">of 843 sent · 98.2%</div>
+            <div class="trend trend--up">delivery rate</div>
+          </button>
+          <button type="button" class="metric" data-go="bounced">
+            <div class="metric__icon metric__icon--warn" aria-hidden="true">!</div>
+            <div class="metric__value">12</div>
+            <div class="metric__label">Bounced</div>
+            <div class="metric__sub">of 843 sent · 1.4%</div>
+            <div class="trend trend--warn">bounce rate</div>
+          </button>
+        </div>
+
+        <section class="card chart-card">
+          <h2>Email Activity · Last 7 days</h2>
+          <div class="chart-scroll">
+            <div class="chart" id="activity-chart">
+              <div class="chart__y" aria-hidden="true">
+                <span>250</span>
+                <span>200</span>
+                <span>150</span>
+                <span>100</span>
+                <span>50</span>
+                <span>0</span>
+              </div>
+              <div class="chart__plot">
+                <button type="button" class="chart__col" data-tip="Monday: 198 received, 124 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 79.2%"></span>
+                    <span class="bar bar--out" style="height: 49.6%"></span>
+                  </span>
+                  <span>Mon</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Tuesday: 187 received, 118 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 74.8%"></span>
+                    <span class="bar bar--out" style="height: 47.2%"></span>
+                  </span>
+                  <span>Tue</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Wednesday: 203 received, 132 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 81.2%"></span>
+                    <span class="bar bar--out" style="height: 52.8%"></span>
+                  </span>
+                  <span>Wed</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Thursday: 178 received, 109 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 71.2%"></span>
+                    <span class="bar bar--out" style="height: 43.6%"></span>
+                  </span>
+                  <span>Thu</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Friday: 215 received, 143 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 86%"></span>
+                    <span class="bar bar--out" style="height: 57.2%"></span>
+                  </span>
+                  <span>Fri</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Saturday: 142 received, 89 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 56.8%"></span>
+                    <span class="bar bar--out" style="height: 35.6%"></span>
+                  </span>
+                  <span>Sat</span>
+                </button>
+                <button type="button" class="chart__col" data-tip="Sunday: 124 received, 128 sent">
+                  <span class="bars">
+                    <span class="bar bar--in" style="height: 49.6%"></span>
+                    <span class="bar bar--out" style="height: 51.2%"></span>
+                  </span>
+                  <span>Sun</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i class="swatch swatch--in"></i> Received</span>
+            <span><i class="swatch swatch--out"></i> Sent</span>
+            <span class="legend__total">Total: Received 1,247 · Sent 843</span>
+          </div>
+          <div id="chart-tooltip" class="tooltip" hidden></div>
+        </section>
+
+        <div class="split">
+          <section class="card">
+            <h2>Recent Emails</h2>
+            <div id="recent-list" class="recent"></div>
+          </section>
+          <section class="card">
+            <h2>Delivery Status</h2>
+            <button type="button" class="pbar" data-go="delivered">
+              <div class="pbar__row">
+                <span>Delivered</span>
+                <span>828 — 98.2%</span>
+              </div>
+              <div class="pbar__track">
+                <div class="pbar__fill pbar__fill--ok" style="width: 98.2%"></div>
+              </div>
+            </button>
+            <button type="button" class="pbar" data-go="explorer">
+              <div class="pbar__row">
+                <span>Pending</span>
+                <span>3 — 0.4%</span>
+              </div>
+              <div class="pbar__track">
+                <div class="pbar__fill pbar__fill--warn" style="width: 0.4%"></div>
+              </div>
+            </button>
+            <button type="button" class="pbar" data-go="bounced">
+              <div class="pbar__row">
+                <span>Bounced</span>
+                <span>12 — 1.4%</span>
+              </div>
+              <div class="pbar__track">
+                <div class="pbar__fill pbar__fill--err" style="width: 1.4%"></div>
+              </div>
+            </button>
+            <h3 class="infra-title">Infrastructure Status</h3>
+            <ul class="infra">
+              <li>✅ Cloudflare Email Routing — Connected</li>
+              <li>✅ AWS SES Mumbai — Verified</li>
+              <li>
+                ✅ ayesharizwan.com — Active<br />
+                <span>Region: ap-south-1</span><br />
+                <span>Last checked: today</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <p class="footnote">
+          Demo data · Numbers are illustrative, not live statistics
+        </p>
+      </section>
+
+      <section id="page-inbox" class="page" data-page="inbox" hidden>
+        <div class="inbox">
+          <aside class="sidebar">
+            <nav id="folders" class="folders">
+              <button type="button" class="folder is-active" data-folder="inbox">
+                Inbox <span data-count="inbox">0</span>
+              </button>
+              <button type="button" class="folder" data-folder="sent">
+                Sent <span data-count="sent">0</span>
+              </button>
+              <button type="button" class="folder" data-folder="drafts">
+                Drafts <span data-count="drafts">0</span>
+              </button>
+              <button type="button" class="folder" data-folder="trash">
+                Trash <span data-count="trash">0</span>
+              </button>
+              <button type="button" class="folder" data-folder="starred">
+                Starred <span data-count="starred">0</span>
+              </button>
+              <button type="button" class="folder" data-folder="archived">
+                Archived <span data-count="archived">0</span>
+              </button>
+            </nav>
+            <div class="status-panel">
+              <h3>System Status</h3>
+              <p>Cloudflare Connected ✅</p>
+              <p>AWS SES Verified ✅</p>
+              <p>Domain Active ✅</p>
+              <p>Region ap-south-1</p>
+            </div>
+          </aside>
+          <section class="list-pane">
+            <div class="list-pane__head">
+              <h2 id="list-title">Inbox</h2>
+              <input id="search" type="search" placeholder="Search mail" autocomplete="off" />
+            </div>
+            <div id="email-list" class="email-list"></div>
+          </section>
+          <section class="reader">
+            <div id="empty-reader" class="empty">Select a conversation</div>
+            <article id="thread" hidden>
+              <div class="thread__top">
+                <div id="thread-avatar" class="avatar"></div>
+                <div>
+                  <strong id="thread-from"></strong>
+                  <p id="thread-email" class="muted"></p>
+                  <p id="thread-to" class="muted"></p>
+                </div>
+                <time id="thread-time"></time>
+              </div>
+              <h2 id="thread-subject"></h2>
+              <div class="actions">
+                <button type="button" data-action="reply">Reply</button>
+                <button type="button" data-action="forward">Forward</button>
+                <button type="button" data-action="star">Star</button>
+                <button type="button" data-action="archive">Archive</button>
+                <button type="button" data-action="delete">Delete</button>
+                <button type="button" data-action="unread">Mark Unread</button>
+              </div>
+              <div id="thread-body" class="thread__body"></div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section id="page-explorer" class="page" data-page="explorer" hidden>
+        <div class="page__head">
+          <h1>Delivery Explorer</h1>
+          <p>Inspect the journey of every message</p>
+        </div>
+        <div id="bounce-banner" class="banner" hidden>
+          12 messages bounced (1.4% of 843 sent). Select a message to inspect its path.
+        </div>
+        <label class="picker">
+          Message
+          <select id="mail-select"></select>
+        </label>
+        <ol id="timeline" class="timeline"></ol>
+        <section class="card">
+          <h2>Architecture</h2>
+          <div class="flow" aria-label="Mail flow">
+            <div class="flow__node">
+              <strong>Sender</strong>
+              <span>Origin mailbox</span>
+            </div>
+            <span class="flow__arrow">→</span>
+            <div class="flow__node">
+              <strong>Cloudflare MX</strong>
+              <span>Email Routing</span>
+            </div>
+            <span class="flow__arrow">→</span>
+            <div class="flow__node">
+              <strong>AWS SES ap-south-1</strong>
+              <span>Accept and deliver</span>
+            </div>
+            <span class="flow__arrow">→</span>
+            <div class="flow__node">
+              <strong>MailFlow Inbox</strong>
+              <span>hello@ayesharizwan.com</span>
+            </div>
+          </div>
+        </section>
+        <p class="footnote">
+          Delivery timeline is simulated. Real event tracking requires backend webhook
+          integration with AWS SES event notifications.
+        </p>
+      </section>
+    </main>
+
+    <nav class="mobile-tabs" aria-label="Mobile">
+      <button type="button" class="tab is-active" data-page="overview">Overview</button>
+      <button type="button" class="tab" data-page="inbox">Inbox</button>
+      <button type="button" class="tab" data-page="explorer">Delivery</button>
+    </nav>
+
+    <div id="compose-overlay" class="overlay" hidden>
+      <div class="modal" role="dialog" aria-labelledby="compose-title">
+        <header>
+          <h2 id="compose-title">New message</h2>
+          <button type="button" id="compose-close" aria-label="Close">✕</button>
+        </header>
+        <form id="compose-form">
+          <label>
+            To
+            <input id="compose-to" type="email" required placeholder="name@company.com" />
+          </label>
+          <label>
+            Subject
+            <input id="compose-subject" type="text" required placeholder="Subject" />
+          </label>
+          <label>
+            Body
+            <textarea id="compose-body" required rows="9" placeholder="Write your message"></textarea>
+          </label>
+          <div class="compose__meta">
+            <span id="char-count">0 characters</span>
+            <span>Sent via AWS SES · ap-south-1</span>
+          </div>
+          <div class="compose__foot">
+            <button type="button" id="discard-btn" class="btn">Discard</button>
+            <button type="submit" class="btn btn--primary">Send</button>
+          </div>
+        </form>
+        <div id="compose-success" hidden>
+          <h2>Queued via AWS SES · ap-south-1</h2>
+          <p id="compose-success-copy" class="muted"></p>
+          <button type="button" id="compose-done" class="btn btn--primary">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
